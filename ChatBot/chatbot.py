@@ -7,7 +7,7 @@ import os
 chave_openai = os.environ.get('key_openai') 
 
 #Chave
-openai.api_key = "chave_openai"
+openai.api_key = chave_openai
 
 #Função para gerar texto a partir do modelo
 
@@ -38,3 +38,31 @@ def gera_texto(texto):
     )
 
     return response.choices[0].text.strip()
+
+#Funçãp principal
+def main():
+    print("\nBem-Vindo ao ChatBot!")
+    print("(Digite 'sair' para encerrar o Chat)")
+
+    #Loop
+    while True:
+        #Coletando a pergunta do usuário.
+        user_message = input("\nPergunta:")
+
+        #Caso a reposta seja sair finalizamos o programa
+        if user_message.lower() == 'sair':
+            break
+
+        #Adiciona a pergunta do usuário em uma variável
+        p_prompt = f"\nUsuário: {user_message }\nChatbot:"
+
+        #Obtém a resposta do modelo
+        chatbot_response = gera_texto(p_prompt)
+
+        #Imprime a reposta do chat bot.
+        print(f"\nChatbot: {chatbot_response}")
+
+#Execução do bloco main
+
+if __name__ == "__main__":
+    main()
